@@ -1,17 +1,10 @@
-//Load HTTP module
-const http = require("http");
-const hostname = "127.0.0.1";
-const port = 3000;
+const Schema = mongoose.Schema;
 
-//Create HTTP server and listen on port 3000 for requests
-const server = http.createServer((req, res) => {
-  //Set the response HTTP header with HTTP status and Content type
-  res.statusCode = 200;
-  res.setHeader("Content-Type", "text/plain");
-  res.end("Hello World\n");
-});
 
-//listen for request on port 3000, and as a callback function have the port listened on logged
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+mongoose.set("strictQuery", false);
+const mongoDB = "mongodb+srv://myAtlasDBUser:<1234>@myatlasclusteredu.gwagcga.mongodb.net/local_library?retryWrites=true&w=majority";
+
+main().catch((err) => console.log(err));
+async function main() {
+  await mongoose.connect(mongoDB);
+}
